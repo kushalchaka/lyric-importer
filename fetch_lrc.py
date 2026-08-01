@@ -18,3 +18,16 @@ for file in os.listdir(directory):
 
     print(f"Filename:  {lrc_filename}")
     print(f"Path: {lrc_filename}")
+
+    if os.path.exists(lrc_path):
+        print(f"Skipping (already exists): {lrc_filename}")
+        continue
+
+    print(f"Searching lyrics for: '{clean_query}'...")
+
+    lrc_data = syncedlyrics.search(clean_query, save_path=lrc_path)
+
+    if lrc_data:
+        print(f"Successfully saved: {lrc_filename}")
+    else:
+        print(f"No lyrics found for: {clean_query}")
