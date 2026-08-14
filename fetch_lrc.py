@@ -29,7 +29,9 @@ for root, _, files in os.walk(directory):
         lrc_data = syncedlyrics.search(clean_query, save_path=lrc_path)
 
         if lrc_data:
-            print
-            print(lrc_data)
+            print(f"Successfully saved: {lrc_filename}")
+            choice = input("View lyrics? (y/n): ").strip().lower()
+            if choice == "y":
+                print(lrc_data)
         else:
             print(f"No lyrics found for: {clean_query}")
