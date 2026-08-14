@@ -2,7 +2,7 @@
 import lyrics for local flac files
 
 - recursively searching subdirectories is mostly working
-
+- added functionality to view lyrics (since sometimes lyric provider will apply incorrect lyrics in cases where several songs with the same name exist)
 work in progress
 
 known issues
