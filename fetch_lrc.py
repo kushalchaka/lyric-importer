@@ -5,6 +5,28 @@ import syncedlyrics
 PREFIX_REGEX = re.compile(r"^\d+\.\s*")
 
 directory = "."
+view_mode = None
+
+def should_view_lyrics():
+    global view_mode
+    if view_mode == "all":
+        return True
+    if view_mode == "skip":
+        return False
+
+    while True:
+        choice = input("View lyrics? [y]es / [n]o / [a]ll / [s]kip all: ").strip().lower()
+        if choice in ("y", "yes"):
+            return True
+        if choice in ("n", "no"):
+            return False
+        if choice in ("a", "all"):
+            view_mode = "all"
+            return True
+        if choice in ("s", "skip"):
+            view_mode = "skip"
+            return False
+        print("Invalid choice. Enter y, n, a, or s.")
 
 for root, _, files in os.walk(directory):
     for file in files:
@@ -30,8 +52,7 @@ for root, _, files in os.walk(directory):
 
         if lrc_data:
             print(f"Successfully saved: {lrc_filename}")
-            choice = input("View lyrics? (y/n): ").strip().lower()
-            if choice == "y":
+            if should_view_lyrics():
                 print(lrc_data)
         else:
             print(f"No lyrics found for: {clean_query}")
